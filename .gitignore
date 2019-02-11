@@ -1,5 +1,11 @@
-.gradle
-/build/
+out/
+build/
+.gradle/
+.idea/
+*.iml
+*.zip
+*.ps1
+target/
 
 # Ignore Gradle GUI config
 gradle-app.setting
