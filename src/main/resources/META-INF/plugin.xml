@@ -1,0 +1,29 @@
+<idea-plugin>
+    <id>com.github.lsp4intellij</id>
+    <name>lsp4intellij-plugin</name>
+    <vendor email="nipunaranasinghe93@gmail.com" url="">YourCompany</vendor>
+
+    <description><![CDATA[
+    A simple IntelliJ plugin, which uses lsp4intellij library as the language server client and capable of providing ballerina language server capabilities.<br>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="173"/>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <completion.contributor implementationClass="com.github.lsp4intellij.contributors.LSPCompletionContributor"
+                                id="LSPCompletionContributor" language="any"/>
+
+        <preloadingActivity
+                implementation="com.github.lsp4intellijplugin.preloading.LSPPreloadingActivity"
+                id="com.github.lsp4intellij.preloading.LSPPreloadingActivity"/>
+
+    </extensions>
+
+    <application-components>
+        <component>
+            <implementation-class>com.github.lsp4intellij.PluginMain</implementation-class>
+        </component>
+    </application-components>
+
+</idea-plugin>
