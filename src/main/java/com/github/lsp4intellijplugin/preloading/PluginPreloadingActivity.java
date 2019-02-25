@@ -1,5 +1,8 @@
 package com.github.lsp4intellijplugin.preloading;
 
+import com.github.lsp4intellij.IntellijLanguageClient;
+import com.github.lsp4intellij.client.languageserver.serverdefinition.RawCommandServerDefinition;
+import com.github.lsp4intellijplugin.ballerinaextension.BallerinaLSPExtensionManager;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.PreloadingActivity;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -16,9 +19,9 @@ import java.nio.file.Paths;
 
 import static com.github.lsp4intellijplugin.preloading.OperatingSystemUtils.getOperatingSystem;
 
-public class LSPPreloadingActivity extends PreloadingActivity {
+public class PluginPreloadingActivity extends PreloadingActivity {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LSPPreloadingActivity.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PluginPreloadingActivity.class);
     private static final String launcherScriptPath = "lib/tools/lang-server/launcher";
     private static final String ballerinaSourcePath = "lib/repo";
 
@@ -59,15 +62,14 @@ public class LSPPreloadingActivity extends PreloadingActivity {
     private static boolean doRegister(@NotNull String sdkPath) {
         String os = getOperatingSystem();
         if (os != null) {
-            String[] args = new String[1];
+            String path = null;
             if (os.equals(OperatingSystemUtils.UNIX) || os.equals(OperatingSystemUtils.MAC)) {
-                args[0] = Paths.get(sdkPath, launcherScriptPath, "language-server-launcher.sh").toString();
+                path = Paths.get(sdkPath, launcherScriptPath, "language-server-launcher.sh").toString();
             } else if (os.equals(OperatingSystemUtils.WINDOWS)) {
-                args[0] = Paths.get(sdkPath, launcherScriptPath, "language-server-launcher.bat").toString();
+                path = Paths.get(sdkPath, launcherScriptPath, "language-server-launcher.bat").toString();
             }
-
-            if (args[0] != null) {
-                LanguageServerRegisterService.register(args);
+            if (path != null) {
+                setServerDefinition(path);
                 LOGGER.info("registered language server definition using Sdk path: " + sdkPath);
                 return true;
             }
@@ -79,6 +81,11 @@ public class LSPPreloadingActivity extends PreloadingActivity {
     @Nullable
     private static String getBallerinaSdk(Project project) {
         // Todo - Add logic
-        return System.getenv("BALLERINA_HOME") ;
+        return System.getenv("BALLERINA_HOME");
+    }
+
+    private static void setServerDefinition(String path) {
+        IntellijLanguageClient.addServerDefinition(new RawCommandServerDefinition("bal", new String[] { path }));
+        IntellijLanguageClient.addExtensionManager("bal", new BallerinaLSPExtensionManager());
     }
 }
