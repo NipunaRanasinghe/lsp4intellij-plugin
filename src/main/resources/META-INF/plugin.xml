@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>com.github.lsp4intellij</id>
+    <id>com.github.lsp4intellijplugin</id>
     <name>lsp4intellij-plugin</name>
     <vendor email="nipunaranasinghe93@gmail.com" url="">YourCompany</vendor>
 
@@ -8,21 +8,26 @@
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="173"/>
 
     <extensions defaultExtensionNs="com.intellij">
+
+        <typedHandler implementation="com.github.lsp4intellij.editor.listeners.LSPTypedHandler" id="LSPTypedHandler"/>
+
         <completion.contributor implementationClass="com.github.lsp4intellij.contributors.LSPCompletionContributor"
                                 id="LSPCompletionContributor" language="any"/>
 
         <preloadingActivity
-                implementation="com.github.lsp4intellijplugin.preloading.LSPPreloadingActivity"
-                id="com.github.lsp4intellij.preloading.LSPPreloadingActivity"/>
+                implementation="com.github.lsp4intellijplugin.preloading.PluginPreloadingActivity"
+                id="com.github.lsp4intellijplugin.preloading.PluginPreloadingActivity"/>
+
+        <inspectionToolProvider implementation="com.github.lsp4intellij.contributors.inspection.LSPInspectionProvider"
+                                id="LSPInspectionProvider"/>
 
     </extensions>
 
     <application-components>
         <component>
-            <implementation-class>com.github.lsp4intellij.PluginMain</implementation-class>
+            <implementation-class>com.github.lsp4intellij.IntellijLanguageClient</implementation-class>
         </component>
     </application-components>
 
