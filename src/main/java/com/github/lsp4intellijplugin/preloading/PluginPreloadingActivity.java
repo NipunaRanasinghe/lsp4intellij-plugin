@@ -2,7 +2,6 @@ package com.github.lsp4intellijplugin.preloading;
 
 import com.github.lsp4intellij.IntellijLanguageClient;
 import com.github.lsp4intellij.client.languageserver.serverdefinition.RawCommandServerDefinition;
-import com.github.lsp4intellijplugin.ballerinaextension.BallerinaLSPExtensionManager;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.PreloadingActivity;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -86,6 +85,6 @@ public class PluginPreloadingActivity extends PreloadingActivity {
 
     private static void setServerDefinition(String path) {
         IntellijLanguageClient.addServerDefinition(new RawCommandServerDefinition("bal", new String[] { path }));
-        IntellijLanguageClient.addExtensionManager("bal", new BallerinaLSPExtensionManager());
+        //  IntellijLanguageClient.addExtensionManager("bal", new BallerinaLSPExtensionManager());
     }
 }
