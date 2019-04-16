@@ -1,7 +1,5 @@
 package com.github.lsp4intellijplugin.preloading;
 
-import com.github.lsp4intellij.IntellijLanguageClient;
-import com.github.lsp4intellij.client.languageserver.serverdefinition.RawCommandServerDefinition;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.PreloadingActivity;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -13,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.wso2.lsp4intellij.IntellijLanguageClient;
+import org.wso2.lsp4intellij.client.languageserver.serverdefinition.RawCommandServerDefinition;
 
 import java.nio.file.Paths;
 

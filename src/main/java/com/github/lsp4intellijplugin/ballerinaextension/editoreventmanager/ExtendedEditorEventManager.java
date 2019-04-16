@@ -1,4 +1,4 @@
-package com.github.lsp4intellijplugin.ballerinaextension.editoreventmanager;/*
+/*
  *  Copyright (c) 2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,27 +13,31 @@ package com.github.lsp4intellijplugin.ballerinaextension.editoreventmanager;/*
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+package com.github.lsp4intellijplugin.ballerinaextension.editoreventmanager;
 
-import com.github.lsp4intellij.client.languageserver.ServerOptions;
-import com.github.lsp4intellij.client.languageserver.requestmanager.RequestManager;
-import com.github.lsp4intellij.client.languageserver.wrapper.LanguageServerWrapper;
-import com.github.lsp4intellij.editor.EditorEventManager;
 import com.github.lsp4intellijplugin.ballerinaextension.client.ExtendedRequestManager;
 import com.github.lsp4intellijplugin.ballerinaextension.server.BallerinaServiceListRequest;
 import com.github.lsp4intellijplugin.ballerinaextension.server.BallerinaServiceListResponse;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.DocumentListener;
+import com.intellij.openapi.editor.event.EditorMouseListener;
+import com.intellij.openapi.editor.event.EditorMouseMotionListener;
 import org.eclipse.lsp4j.Position;
+import org.wso2.lsp4intellij.client.languageserver.ServerOptions;
+import org.wso2.lsp4intellij.client.languageserver.requestmanager.RequestManager;
+import org.wso2.lsp4intellij.client.languageserver.wrapper.LanguageServerWrapper;
+import org.wso2.lsp4intellij.editor.EditorEventManager;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class ExtendedEditorEventManager extends EditorEventManager {
 
-    public ExtendedEditorEventManager(Editor editor, DocumentListener documentListener, RequestManager requestManager,
-            ServerOptions serverOptions, LanguageServerWrapper wrapper) {
-        super(editor, documentListener, requestManager, serverOptions, wrapper);
+    public ExtendedEditorEventManager(Editor editor, DocumentListener documentListener,
+            EditorMouseListener mouseListener, EditorMouseMotionListener mouseMotionListener,
+            RequestManager requestManager, ServerOptions serverOptions, LanguageServerWrapper wrapper) {
+        super(editor, documentListener, mouseListener, mouseMotionListener, requestManager, serverOptions, wrapper);
     }
 
     @Override

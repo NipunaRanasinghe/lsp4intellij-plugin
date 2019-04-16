@@ -4,11 +4,11 @@ import com.github.lsp4intellijplugin.ballerinaextension.server.BallerinaDocument
 import com.github.lsp4intellijplugin.ballerinaextension.server.BallerinaServiceListRequest;
 import com.github.lsp4intellijplugin.ballerinaextension.server.BallerinaServiceListResponse;
 import com.github.lsp4intellijplugin.ballerinaextension.server.ExtendedLanguageServer;
-import com.github.lsp4intellij.client.languageserver.requestmanager.DefaultRequestManager;
-import com.github.lsp4intellij.client.languageserver.wrapper.LanguageServerWrapper;
 import org.eclipse.lsp4j.ServerCapabilities;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.lsp4j.services.LanguageServer;
+import org.wso2.lsp4intellij.client.languageserver.requestmanager.DefaultRequestManager;
+import org.wso2.lsp4intellij.client.languageserver.wrapper.LanguageServerWrapper;
 
 import java.util.concurrent.CompletableFuture;
 
