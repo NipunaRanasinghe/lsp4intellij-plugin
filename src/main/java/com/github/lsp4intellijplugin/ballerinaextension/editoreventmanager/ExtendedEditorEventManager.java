@@ -28,6 +28,7 @@ import org.wso2.lsp4intellij.client.languageserver.ServerOptions;
 import org.wso2.lsp4intellij.client.languageserver.requestmanager.RequestManager;
 import org.wso2.lsp4intellij.client.languageserver.wrapper.LanguageServerWrapper;
 import org.wso2.lsp4intellij.editor.EditorEventManager;
+import org.wso2.lsp4intellij.listeners.LSPCaretListenerImpl;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -35,16 +36,16 @@ import java.util.concurrent.ExecutionException;
 public class ExtendedEditorEventManager extends EditorEventManager {
 
     public ExtendedEditorEventManager(Editor editor, DocumentListener documentListener,
-            EditorMouseListener mouseListener, EditorMouseMotionListener mouseMotionListener,
+            EditorMouseListener mouseListener, EditorMouseMotionListener mouseMotionListener, LSPCaretListenerImpl caretListener,
             RequestManager requestManager, ServerOptions serverOptions, LanguageServerWrapper wrapper) {
-        super(editor, documentListener, mouseListener, mouseMotionListener, requestManager, serverOptions, wrapper);
+        super(editor, documentListener, mouseListener, mouseMotionListener, caretListener, requestManager, serverOptions, wrapper);
     }
 
     @Override
     public Iterable<? extends LookupElement> completion(Position pos) {
         BallerinaServiceListRequest serviceRequest = new BallerinaServiceListRequest();
-        serviceRequest.setDocumentIdentifier(super.identifier);
-        ExtendedRequestManager requestManager = (ExtendedRequestManager) super.requestManager;
+        serviceRequest.setDocumentIdentifier(super.getIdentifier());
+        ExtendedRequestManager requestManager = (ExtendedRequestManager) super.getRequestManager();
         CompletableFuture<BallerinaServiceListResponse> responseFuture = requestManager.serviceList(serviceRequest);
         BallerinaServiceListResponse response = null;
         try {
